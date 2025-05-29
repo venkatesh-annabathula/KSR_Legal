@@ -19,60 +19,87 @@
         h2 {
             color: #007bff;
         }
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
 <div class="container form-container">
-    <h2>{{ 'Edit' if task else 'Add' }} Copy Application</h2>
+    <h2>{{ 'Update' if task else 'Add' }} Copy Application</h2>
     <form method="POST" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Case Number</label>
-            <input type="text" name="case_number" class="form-control" value="{{ task.case_number if task else '' }}">
+            <input type="text" required name="case_number" class="form-control" value="{{ task.case_number if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">CA Filed Date</label>
-            <input type="date" name="ca_filed_date" class="form-control" value="{{ task.ca_filed_date if task else '' }}">
+            <input type="date" required name="ca_filed_date" class="form-control" value="{{ task.ca_filed_date if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">CA Number</label>
-            <input type="text" name="ca_number" class="form-control" value="{{ task.ca_number if task else '' }}">
+            <input type="text" required name="ca_number" class="form-control" value="{{ task.ca_number if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Requested Documents</label>
-            <input type="text" name="required_details" class="form-control" value="{{ task.required_details if task else '' }}">
+            <input type="text" required name="required_details" class="form-control" value="{{ task.required_details if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Filed For</label>
-            <input type="text" name="filed_for" class="form-control" value="{{ task.filed_for if task else '' }}">
+            <input type="text" required name="filed_for" class="form-control" value="{{ task.filed_for if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">CF Date</label>
-            <input type="date" name="cf_date" class="form-control" value="{{ task.cf_date if task else '' }}">
+            <input type="date" required name="cf_date" class="form-control" value="{{ task.cf_date if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">CF/NJS Amount</label>
-            <input type="text" name="cf_amount" class="form-control" value="{{ task.cf_amount if task else '' }}">
+            <input type="text" required name="cf_amount" class="form-control" value="{{ task.cf_amount if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">CF Paid Date</label>
-            <input type="date" name="cf_paid_date" class="form-control" value="{{ task.cf_paid_date if task else '' }}">
+            <input type="date" required name="cf_paid_date" class="form-control" value="{{ task.cf_paid_date if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Ready Date</label>
-            <input type="date" name="ca_ready_date" class="form-control" value="{{ task.ca_ready_date if task else '' }}">
+            <input type="date" required name="ca_ready_date" class="form-control" value="{{ task.ca_ready_date if task else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Remarks</label>
-            <input type="text" name="remarks" class="form-control" value="{{ task.remarks if task else '' }}">
+            <input type="text" required  name="remarks" class="form-control" value="{{ task.remarks if task else '' }}">
         </div>
+
+        {% if task and task.image1 %}
         <div class="mb-3">
-            <label class="form-label">Upload Image 1:</label>
+            <label class="form-label">Current Image 1:</label><br>
+            <a href="{{ url_for('static', filename='images/ca/' + task.image1) }}" download>
+                <img src="{{ url_for('static', filename='images/ca/' + task.image1) }}" class="image-preview" alt="Current Image 1">
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Upload New Image 1 (optional):</label>
             <input type="file" name="image1" class="form-control">
         </div>
+
+        {% if task and task.image2 %}
         <div class="mb-3">
-            <label class="form-label">Upload Image 2:</label>
+            <label class="form-label">Current Image 2:</label><br>
+            <a href="{{ url_for('static', filename='images/ca/' + task.image2) }}" download>
+                <img src="{{ url_for('static', filename='images/ca/' + task.image2) }}" class="image-preview" alt="Current Image 2">
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Upload New Image 2 (optional):</label>
             <input type="file" name="image2" class="form-control">
         </div>
+
         <div class="d-flex justify-content-between">
             <button type="submit" class="btn btn-success">{% if task %}Update{% else %}Add{% endif %} Copy Application</button>
             <a href="/" class="btn btn-secondary">Cancel</a>

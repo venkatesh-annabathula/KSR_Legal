@@ -95,6 +95,18 @@ def update(task_id):
     if request.method == 'POST':
         for field in request.form:
             setattr(task, field, request.form[field])
+        # Handle updated images
+        image1 = request.files.get('image1')
+        if image1 and allowed_file(image1.filename):
+            filename1 = secure_filename(image1.filename)
+            image1.save(os.path.join(app.config['UPLOAD_FOLDER'], filename1))
+            task.image1 = filename1
+
+        image2 = request.files.get('image2')
+        if image2 and allowed_file(image2.filename):
+            filename2 = secure_filename(image2.filename)
+            image2.save(os.path.join(app.config['UPLOAD_FOLDER'], filename2))
+            task.image2 = filename2
         db.session.commit()
         return redirect('/')
     return render_template('form.html', task=task)
