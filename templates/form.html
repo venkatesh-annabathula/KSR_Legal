@@ -31,8 +31,8 @@
     <form method="POST">
         {% for field, label in [
             ('case_number', 'Case Number'), ('ca_filed_date', 'CA Filed Date'), ('ca_number', 'CA Number'),
-            ('required_details', 'Required Details'), ('filed_for', 'Filed For'), ('cf_date', 'CF Date'),
-            ('cf_amount_cf', 'CF Amount (CF)'), ('cf_amount_njs', 'CF Amount (NJS)'), ('cf_paid_date', 'CF Paid Date'),
+            ('required_details', 'Requested Documents'), ('filed_for', 'Filed For'), ('cf_date', 'CF Date'),
+            ('cf_amount', 'CF Amount (CF/NJS)'), ('cf_paid_date', 'CF Paid Date'),
             ('ca_ready_date', 'CA Ready Date'), ('remarks', 'Remarks')] %}
         <div class="mb-3">
             <label class="form-label">{{ label }}</label>

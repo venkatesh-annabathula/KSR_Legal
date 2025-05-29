@@ -41,8 +41,7 @@ class Task(db.Model):
     required_details = db.Column(db.Text, nullable=False)
     filed_for = db.Column(db.String(100), nullable=False)
     cf_date = db.Column(db.Date, nullable=False)
-    cf_amount_cf = db.Column(db.Float, nullable=False)
-    cf_amount_njs = db.Column(db.Float, nullable=False)
+    cf_amount = db.Column(db.Float, nullable=False)
     cf_paid_date = db.Column(db.Date, nullable=True)
     ca_ready_date = db.Column(db.Date, nullable=True)
     remarks = db.Column(db.Text, nullable=True)
@@ -73,8 +72,7 @@ def add():
             required_details=request.form['required_details'],
             filed_for=request.form['filed_for'],
             cf_date=datetime.strptime(request.form['cf_date'], '%Y-%m-%d'),
-            cf_amount_cf=float(request.form['cf_amount_cf']),
-            cf_amount_njs=float(request.form['cf_amount_njs']),
+            cf_amount=float(request.form['cf_amount']),
             cf_paid_date=datetime.strptime(request.form['cf_paid_date'], '%Y-%m-%d') if request.form['cf_paid_date'] else None,
             ca_ready_date=datetime.strptime(request.form['ca_ready_date'], '%Y-%m-%d') if request.form['ca_ready_date'] else None,
             remarks=request.form['remarks']
@@ -95,8 +93,7 @@ def update(id):
         task.required_details = request.form['required_details']
         task.filed_for = request.form['filed_for']
         task.cf_date = datetime.strptime(request.form['cf_date'], '%Y-%m-%d')
-        task.cf_amount_cf = float(request.form['cf_amount_cf'])
-        task.cf_amount_njs = float(request.form['cf_amount_njs'])
+        task.cf_amount = float(request.form['cf_amount'])
         task.cf_paid_date = datetime.strptime(request.form['cf_paid_date'], '%Y-%m-%d') if request.form['cf_paid_date'] else None
         task.ca_ready_date = datetime.strptime(request.form['ca_ready_date'], '%Y-%m-%d') if request.form['ca_ready_date'] else None
         task.remarks = request.form['remarks']

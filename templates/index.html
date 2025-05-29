@@ -31,7 +31,7 @@
 </head>
 <body>
 <div class="container dashboard">
-    <h1 class="text-center mb-4">KSR Legal Services - CASE Dashboard</h1>
+    <h1 class="text-center mb-4">KSR Worksheet - CA Dashboard</h1>
     <div class="d-flex justify-content-end mb-3">
         <a href="/add" class="btn btn-primary me-2">+ Add New Case</a>
         <a href="/logout" class="btn btn-secondary">Logout</a>
@@ -40,8 +40,8 @@
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead>
                 <tr>
-                    <th>Case #</th><th>CA Filed Date</th><th>CA #</th><th>Details</th><th>Filed For</th><th>CF Date</th>
-                    <th>CF</th><th>NJS</th><th>Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Actions</th>
+                    <th>Case No</th><th>CA Filed Date</th><th>CA No</th><th>Requested Documents</th><th>Filed For</th><th>CF Date</th>
+                    <th>CF/NJS Amount</th><th>CF Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,8 +53,7 @@
                     <td>{{ task.required_details }}</td>
                     <td>{{ task.filed_for }}</td>
                     <td>{{ task.cf_date }}</td>
-                    <td>{{ task.cf_amount_cf }}</td>
-                    <td>{{ task.cf_amount_njs }}</td>
+                    <td>{{ task.cf_amount }}</td>
                     <td>{{ task.cf_paid_date }}</td>
                     <td>{{ task.ca_ready_date }}</td>
                     <td>{{ task.remarks }}</td>
