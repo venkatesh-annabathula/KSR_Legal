@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +28,10 @@
             background-color: #343a40;
             color: white;
         }
+        img {
+            max-height: 80px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
@@ -41,7 +46,7 @@
             <thead>
                 <tr>
                     <th>Case No</th><th>CA Filed Date</th><th>CA No</th><th>Requested Documents</th><th>Filed For</th><th>CF Date</th>
-                    <th>CF/NJS Amount</th><th>CF Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Actions</th>
+                    <th>CF/NJS Amount</th><th>CF Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Image 1</th><th>Image 2</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,6 +62,16 @@
                     <td>{{ task.cf_paid_date }}</td>
                     <td>{{ task.ca_ready_date }}</td>
                     <td>{{ task.remarks }}</td>
+                    <td>
+                        {% if task.image1 %}
+                        <img src="{{ url_for('static', filename='images/ca/' + task.image1) }}" alt="Image 1">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if task.image2 %}
+                        <img src="{{ url_for('static', filename='images/ca/' + task.image2) }}" alt="Image 2">
+                        {% endif %}
+                    </td>
                     <td>
                         <a href="/update/{{ task.id }}" class="btn btn-warning btn-sm">Edit</a>
                         <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
