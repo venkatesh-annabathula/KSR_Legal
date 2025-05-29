@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if task %}Update{% else %}Add{% endif %} Task - KSR Legal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f1f1f1;
+        }
+        .task-form-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #007bff;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="task-form-container">
+    <h2>{% if task %}Update{% else %}Add{% endif %} Case</h2>
+    <form method="POST">
+        {% for field, label in [
+            ('case_number', 'Case Number'), ('ca_filed_date', 'CA Filed Date'), ('ca_number', 'CA Number'),
+            ('required_details', 'Required Details'), ('filed_for', 'Filed For'), ('cf_date', 'CF Date'),
+            ('cf_amount_cf', 'CF Amount (CF)'), ('cf_amount_njs', 'CF Amount (NJS)'), ('cf_paid_date', 'CF Paid Date'),
+            ('ca_ready_date', 'CA Ready Date'), ('remarks', 'Remarks')] %}
+        <div class="mb-3">
+            <label class="form-label">{{ label }}</label>
+            {% if field == 'required_details' or field == 'remarks' %}
+            <textarea name="{{ field }}" class="form-control">{{ task[field] if task else '' }}</textarea>
+            {% else %}
+            <input type="text" name="{{ field }}" class="form-control" value="{{ task[field] if task else '' }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">{% if task %}Update{% else %}Add{% endif %} Task</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

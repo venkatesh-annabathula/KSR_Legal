@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Dashboard - KSR Legal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .dashboard {
+            margin-top: 40px;
+        }
+        .dashboard h1 {
+            color: #007bff;
+            font-weight: 600;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            color: black;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        table thead {
+            background-color: #343a40;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container dashboard">
+    <h1 class="text-center mb-4">KSR Legal Services - CASE Dashboard</h1>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="/add" class="btn btn-primary me-2">+ Add New Case</a>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Case #</th><th>CA Filed Date</th><th>CA #</th><th>Details</th><th>Filed For</th><th>CF Date</th>
+                    <th>CF</th><th>NJS</th><th>Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.case_number }}</td>
+                    <td>{{ task.ca_filed_date }}</td>
+                    <td>{{ task.ca_number }}</td>
+                    <td>{{ task.required_details }}</td>
+                    <td>{{ task.filed_for }}</td>
+                    <td>{{ task.cf_date }}</td>
+                    <td>{{ task.cf_amount_cf }}</td>
+                    <td>{{ task.cf_amount_njs }}</td>
+                    <td>{{ task.cf_paid_date }}</td>
+                    <td>{{ task.ca_ready_date }}</td>
+                    <td>{{ task.remarks }}</td>
+                    <td>
+                        <a href="/update/{{ task.id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/delete/{{ task.id }}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
