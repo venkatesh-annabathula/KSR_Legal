@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KSR Legal - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Body Styling */
+        body {
+            background: linear-gradient(to right, #e0f7fa, #f8f9fa);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Container Card Styling */
+        .container {
+            background-color: #ffffff;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        h2 {
+            font-weight: 700;
+            text-shadow: 0 1px 0 #fff;
+            color: #0d47a1;
+        }
+
+        /* Nav Tabs Styling */
+        .nav-tabs {
+            border-bottom: none;
+            justify-content: center;
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            border-radius: 10px 10px 0 0;
+            margin: 0 5px;
+            color: #0d47a1;
+            background-color: #e3f2fd;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background-color: #bbdefb;
+            color: #0b3c91;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #0d47a1;
+            color: #ffffff;
+            box-shadow: 0 -2px 10px rgba(13, 71, 161, 0.2);
+        }
+
+        /* Tab Content Styling */
+        .tab-content {
+            border: 1px solid #dee2e6;
+            border-radius: 0 0 10px 10px;
+            background-color: #f1f8ff;
+            padding: 30px;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">KSR Filing Dashboards</h2>
+
+    <ul class="nav nav-tabs" id="dashboardTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="ca-tab" data-bs-toggle="tab" data-bs-target="#ca" type="button" role="tab">CA Dashboard</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="betta-tab" data-bs-toggle="tab" data-bs-target="#betta" type="button" role="tab">BETTA Filing</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="petitions-tab" data-bs-toggle="tab" data-bs-target="#petitions" type="button" role="tab">PETITIONS Filing</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="newcase-tab" data-bs-toggle="tab" data-bs-target="#newcase" type="button" role="tab">NEW CASE Filing</button>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3" id="dashboardTabsContent">
+        <!-- CA Dashboard -->
+        <div class="tab-pane fade show active" id="ca" role="tabpanel">
+            {% include 'partials/ca_dashboard_table.html' %}
+        </div>
+
+        <!-- BETTA Dashboard -->
+        <div class="tab-pane fade" id="betta" role="tabpanel">
+            {% include 'partials/betta_dashboard_table.html' %}
+        </div>
+
+        <!-- PETITIONS Dashboard -->
+        <div class="tab-pane fade" id="petitions" role="tabpanel">
+            {% include 'partials/petitions_dashboard_table.html' %}
+        </div>
+
+        <!-- NEW CASE Dashboard -->
+        <div class="tab-pane fade" id="newcase" role="tabpanel">
+            {% include 'partials/newcase_dashboard_table.html' %}
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!-- Add these buttons in your dashboard.html template inside each row of petition/newcase tables -->
+
+<!-- For Petition -->
+<td>
+    <a href="/petition/view/{{ petition.id }}" class="btn btn-sm btn-info">View</a>
+    <a href="/petition/update/{{ petition.id }}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="/petition/delete/{{ petition.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
+</td>
+
+<!-- For New Case -->
+<td>
+    <a href="/newcase/view/{{ new_case.id }}" class="btn btn-sm btn-info">View</a>
+    <a href="/newcase/update/{{ new_case.id }}" class="btn btn-sm btn-warning">Edit</a>
+    <a href="/newcase/delete/{{ new_case.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this entry?');">Delete</a>
+</td>

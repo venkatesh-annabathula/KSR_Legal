@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Edit' if betta else 'Add' }} Petition Filing - KSR Legal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+        }
+        .form-container {
+            margin-top: 50px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #007bff;
+        }
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container form-container">
+    <h2>{{ 'Update' if entry else 'Add' }} Petition Filing Details</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <!-- {% for field in ['court_name', 'case_no', 'petition_filed_date', 'petition_filed_for', 'gr_number', 'gr_date', 'hearing_date'] %}
+            <div class="mb-3">
+                <label class="form-label">{{ field.replace('_', ' ').title() }}</label>
+                <input type="text" name="{{ field }}" class="form-control" value="{{ entry[field] if entry else '' }}">
+            </div>
+        {% endfor %} -->
+        <div class="mb-3">
+            <label class="form-label">Court Name</label>
+            <input type="text" name="court_name" class="form-control" value="{{ entry['court_name'] if entry else '' }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Case No</label>
+            <input type="text" name="case_no" class="form-control" value="{{ entry['case_no'] if entry else '' }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Petition Filed Date</label>
+            <input type="date" name="petition_filed_date" class="form-control" value="{{ entry['petition_filed_date'] if entry else '' }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Petition Filed For</label>
+            <input type="text" name="petition_filed_for" class="form-control" value="{{ entry['petition_filed_for'] if entry else '' }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">GR Number</label>
+            <input type="text" name="gr_number" class="form-control" value="{{ entry['gr_number'] if entry else '' }}">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Hearing Date</label>
+            <input type="date" name="hearing_date" class="form-control" value="{{ entry['hearing_date'] if entry else '' }}">
+        </div>
+
+        {% if entry and entry.image1 %}
+        <div class="mb-3">
+            <label class="form-label">Current Image 1:</label><br>
+            <a href="{{ url_for('static', filename='images/petitions/' + entry.image1) }}" download>
+                <img src="{{ url_for('static', filename='images/petitions/' + entry.image1) }}" class="image-preview" alt="Current Image 1">
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Upload New Image 1 (optional):</label>
+            <input type="file" name="image1" class="form-control">
+        </div>
+
+        {% if entry and entry.image2 %}
+        <div class="mb-3">
+            <label class="form-label">Current Image 2:</label><br>
+            <a href="{{ url_for('static', filename='images/petitions/' + entry.image2) }}" download>
+                <img src="{{ url_for('static', filename='images/petitions/' + entry.image2) }}" class="image-preview" alt="Current Image 2">
+            </a>
+        </div>
+        {% endif %}
+
+        <div class="mb-3">
+            <label class="form-label">Upload New Image 2 (optional):</label>
+            <input type="file" name="image2" class="form-control">
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">{% if entry %}Update{% else %}Add{% endif %} Petition </button>
+            <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

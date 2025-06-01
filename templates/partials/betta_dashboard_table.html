@@ -1,0 +1,87 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Betta Dashboard - KSR Legal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f0f2f5;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .dashboard {
+            margin-top: 40px;
+        }
+        .dashboard h1 {
+            color: #007bff;
+            font-weight: 600;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+            color: black;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        table thead {
+            background-color: #343a40;
+            color: white;
+        }
+        img {
+            max-height: 80px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+<div class="container dashboard">
+    <h1 class="text-center mb-4">KSR Worksheet - Betta Dashboard</h1>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="/betta/add" class="btn btn-primary me-2">+ Add New Betta</a>
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>SL.No</th><th>Court Name</th><th>Case No</th><th>Betta Paid On</th><th>Betta Paid For</th>
+                    <th>GR Number</th><th>GR Date</th><th>Returned Date</th><th>PSA Numbers</th><th>Status</th><th>Remarks</th><th>Image 1</th><th>Image 2</th><th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for betta in bettas %}
+                <tr class="{% if betta.status == 'Done' %}table-success{% elif betta.status == 'Pending' %}table-warning{% endif %}">
+                    <td>{{ loop.index }}</td>
+                    <td>{{ betta.court_name }}</td>
+                    <td>{{ betta.case_no }}</td>
+                    <td>{{ betta.betta_paid_on }}</td>
+                    <td>{{ betta.betta_paid_for }}</td>
+                    <td>{{ betta.gr_number }}</td>
+                    <td>{{ betta.gr_date }}</td>
+                    <td>{{ betta.betta_returned_date }}</td>
+                    <td>{{ betta.psa_numbers }}</td>
+                    <td>{{ betta.status }}</td>
+                    <td>{{ betta.remarks }}</td>
+                    <td>
+                        {% if betta.image1 %}
+                        <img src="{{ url_for('static', filename='images/betta/' + betta.image1) }}" alt="Image 1">
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if betta.image2 %}
+                        <img src="{{ url_for('static', filename='images/betta/' + betta.image2) }}" alt="Image 2">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/betta/update/{{ betta.id }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="/betta/delete/{{ betta.id }}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
