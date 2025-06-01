@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @page {
+            margin: 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .header {
+            text-align: right;
+            font-size: 10px;
+            color: #555;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            position: running(footer);
+        }
+
+        h2 {
+            background-color: #0d47a1;
+            color: white;
+            padding: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 5px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e0e0e0;
+        }
+
+        .status-in-progress {
+            background-color: #fff3cd;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+        }
+
+        .status-error {
+            background-color: #f8d7da;
+        }
+
+        .status-other {
+            background-color: #e2e3e5;
+        }
+
+        .status-unserved {
+            background-color: #fff3cd;
+        }
+
+        .status-served {
+            background-color: #d4edda;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    Generated on: {{ datetime_now }}
+</div>
+
+<!-- CA Dashboard -->
+<h2>CA Dashboard</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Case No</th>
+            <th>CA Filed Date</th>
+            <th>CA Number</th>
+            <th>Filed For</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for task in tasks %}
+        <tr class="status-{{ task.status|lower|replace(' ', '-') if task.status else 'other' }}">
+            <td>{{ task.case_number }}</td>
+            <td>{{ task.ca_filed_date }}</td>
+            <td>{{ task.ca_number }}</td>
+            <td>{{ task.filed_for }}</td>
+            <td>{{ task.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- BETTA Filing -->
+<h2>BETTA Filing</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Court</th><th>Case No</th><th>Paid On</th><th>Paid For</th><th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for b in bettas %}
+        <tr class="status-{{ b.status|lower|replace(' ', '-') if b.status else 'other' }}">
+            <td>{{ b.court_name }}</td>
+            <td>{{ b.case_no }}</td>
+            <td>{{ b.betta_paid_on }}</td>
+            <td>{{ b.betta_paid_for }}</td>
+            <td>{{ b.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- PETITIONS Filing -->
+<h2>PETITIONS Filing</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Court</th><th>Case No</th><th>Filed Date</th><th>Filed For</th><th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in petitions %}
+        <tr class="status-{{ p.status|lower|replace(' ', '-') if p.status else 'other' }}">
+            <td>{{ p.court_name }}</td>
+            <td>{{ p.case_no }}</td>
+            <td>{{ p.petition_filed_date }}</td>
+            <td>{{ p.petition_filed_for }}</td>
+            <td>{{ p.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- NEW CASE Filing -->
+<h2>NEW CASE Filing</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Court</th><th>Filed Date</th><th>Nature</th><th>Case No</th><th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for n in new_cases %}
+        <tr class="status-{{ n.status|lower|replace(' ', '-') if n.status else 'other' }}">
+            <td>{{ n.court_name }}</td>
+            <td>{{ n.filed_date }}</td>
+            <td>{{ n.nature_of_case }}</td>
+            <td>{{ n.case_no }}</td>
+            <td>{{ n.status }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="footer">
+    Page <pdf:page> of <pdf:totalpages>
+</div>
+
+</body>
+</html>

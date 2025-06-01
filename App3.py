@@ -4,6 +4,16 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from functools import wraps
+from flask import make_response
+from xhtml2pdf import pisa
+from io import BytesIO
+from flask import Response
+from datetime import datetime
+
+import pandas as pd
+from openpyxl.styles import PatternFill
+from openpyxl.utils.dataframe import dataframe_to_rows
+from openpyxl import Workbook
 
 app = Flask(__name__)
 
@@ -116,6 +126,8 @@ class NewCaseFiling(db.Model):
     image2 = db.Column(db.String(255))
 
 # === Routes ===
+
+
 @app.route('/')
 @admin_required
 def index():
@@ -370,6 +382,99 @@ def update_new_case(id):
     return render_template('newcase_form.html', entry=entry)
 
 
+
+@app.route('/download/pdf')
+@admin_required
+def download_pdf():
+    tasks = Task.query.all()
+    bettas = BettaFiling.query.all()
+    petitions = PetitionFiling.query.all()
+    new_cases = NewCaseFiling.query.all()
+
+    html = render_template(
+        'pdf_template.html',
+        tasks=tasks,
+        bettas=bettas,
+        petitions=petitions,
+        new_cases=new_cases,
+        datetime_now=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    )
+
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("UTF-8")), result)
+    
+    if not pdf.err:
+        response = make_response(result.getvalue())
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=KSR_Filing_Dashboard.pdf'
+        return response
+    return "PDF generation failed"
+
+@app.route('/download/excel')
+@admin_required
+def download_excel():
+    # Load all data
+    task_data = Task.query.all()
+    betta_data = BettaFiling.query.all()
+    petition_data = PetitionFiling.query.all()
+    newcase_data = NewCaseFiling.query.all()
+
+    wb = Workbook()
+    wb.remove(wb.active)
+
+    # === Helper: Add sheet from list of objects ===
+    def add_sheet(sheet_name, queryset, columns):
+        ws = wb.create_sheet(title=sheet_name)
+        df = pd.DataFrame([{col: getattr(obj, col) for col in columns} for obj in queryset])
+
+        if df.empty:
+            ws.append(["No data available"])
+            return
+
+        # Add header
+        for r in dataframe_to_rows(df, index=False, header=True):
+            ws.append(r)
+
+        # Apply color coding
+        status_col_idx = columns.index('status') + 1  # Excel columns start at 1
+        for row in ws.iter_rows(min_row=2, max_row=ws.max_row, min_col=1, max_col=len(columns)):
+            status_cell = row[status_col_idx - 1]
+            status = (status_cell.value or '').strip().lower()
+
+            fill = None
+            if 'in progress' in status:
+                fill = PatternFill(start_color="FFF3CD", end_color="FFF3CD", fill_type="solid")  # Light Yellow
+            elif 'completed' in status:
+                fill = PatternFill(start_color="D4EDDA", end_color="D4EDDA", fill_type="solid")  # Light Green
+            elif 'error' in status:
+                fill = PatternFill(start_color="F8D7DA", end_color="F8D7DA", fill_type="solid")  # Light Red
+            elif 'served' in status:
+                fill = PatternFill(start_color="D4EDDA", end_color="D4EDDA", fill_type="solid")  # Light Green
+            elif 'unserved' in status:
+                fill = PatternFill(start_color="F8D7DA", end_color="F8D7DA", fill_type="solid")  # Light Red
+            else:
+                fill = PatternFill(start_color="E2E3E5", end_color="E2E3E5", fill_type="solid")  # Light Gray
+
+            for cell in row:
+                cell.fill = fill
+
+    # Define fields for each model
+    add_sheet("CA Dashboard", task_data, ['case_number', 'ca_filed_date', 'ca_number', 'filed_for', 'status'])
+    add_sheet("BETTA Filing", betta_data, ['court_name', 'case_no', 'betta_paid_on', 'betta_paid_for', 'status'])
+    add_sheet("PETITIONS Filing", petition_data, ['court_name', 'case_no', 'petition_filed_date', 'petition_filed_for', 'status'])
+    add_sheet("NEW CASE Filing", newcase_data, ['court_name', 'filed_date', 'nature_of_case', 'case_no', 'status'])
+
+    # Save to memory
+    from io import BytesIO
+    output = BytesIO()
+    wb.save(output)
+    output.seek(0)
+
+    return Response(
+        output,
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": "attachment;filename=KSR_Filing_Dashboard.xlsx"}
+    )
 
 # === Auth ===
 @app.route('/register', methods=['GET', 'POST'])

@@ -83,6 +83,21 @@
         </li>
     </ul>
 
+    <!-- <div class="text-end mb-3">
+        <a href="{{ url_for('download_pdf') }}" class="btn btn-danger">
+            Download All Data (PDF)
+        </a>
+    </div> -->
+    <div class="text-end mb-3">
+        <a href="{{ url_for('download_pdf') }}" class="btn btn-danger me-2">
+            Download PDF
+        </a>
+        <a href="{{ url_for('download_excel') }}" class="btn btn-success">
+            Download Excel
+        </a>
+    </div>
+
+
     <div class="tab-content mt-3" id="dashboardTabsContent">
         <!-- CA Dashboard -->
         <div class="tab-pane fade show active" id="ca" role="tabpanel">
