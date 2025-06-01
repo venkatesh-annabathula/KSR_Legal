@@ -67,6 +67,7 @@ class Task(db.Model):
     cf_paid_date = db.Column(db.String(100))
     ca_ready_date = db.Column(db.String(100))
     remarks = db.Column(db.Text)
+    status = db.Column(db.String(50))
     image1 = db.Column(db.String(255))
     image2 = db.Column(db.String(255))
 
@@ -94,6 +95,7 @@ class PetitionFiling(db.Model):
     gr_number = db.Column(db.String(100))
     gr_date = db.Column(db.String(100))
     hearing_date = db.Column(db.String(100))
+    status = db.Column(db.String(50))
     image1 = db.Column(db.String(255))
     image2 = db.Column(db.String(255))
 
@@ -109,6 +111,7 @@ class NewCaseFiling(db.Model):
     defendant_name = db.Column(db.String(100))
     made_over_court = db.Column(db.String(100))
     hearing_date = db.Column(db.String(100))
+    status = db.Column(db.String(50))
     image1 = db.Column(db.String(255))
     image2 = db.Column(db.String(255))
 

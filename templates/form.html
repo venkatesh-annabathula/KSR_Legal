@@ -71,6 +71,10 @@
             <label class="form-label">Remarks</label>
             <input type="text" required  name="remarks" class="form-control" value="{{ task.remarks if task else '' }}">
         </div>
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <input type="text" required  name="status" class="form-control" value="{{ task.status if task else '' }}">
+        </div>
 
         {% if task and task.image1 %}
         <div class="mb-3">

@@ -32,6 +32,10 @@
             max-height: 80px;
             border-radius: 8px;
         }
+        .td {
+            align-items: center;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -46,12 +50,12 @@
             <thead>
                 <tr>
                     <th>SL.No</th><th>Court Name</th><th>Case No</th><th>Betta Paid On</th><th>Betta Paid For</th>
-                    <th>GR Number</th><th>GR Date</th><th>Returned Date</th><th>PSA Numbers</th><th>Status</th><th>Remarks</th><th>Image 1</th><th>Image 2</th><th>Actions</th>
+                    <th>GR Number</th><th>GR Date</th><th>Returned Date</th><th>PSA Numbers</th><th>Status</th><th>Remarks</th><th>Photocopy 1</th><th>Photocopy 2</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for betta in bettas %}
-                <tr class="{% if betta.status == 'Done' %}table-success{% elif betta.status == 'Pending' %}table-warning{% endif %}">
+                <tr class="{% if betta.status == 'Served' %}table-success{% elif betta.status == 'Unserved' %}table-warning{% endif %}">
                     <td>{{ loop.index }}</td>
                     <td>{{ betta.court_name }}</td>
                     <td>{{ betta.case_no }}</td>

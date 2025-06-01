@@ -32,6 +32,10 @@
             max-height: 80px;
             border-radius: 8px;
         }
+        .td {
+            align-items: center;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -46,12 +50,12 @@
             <thead>
                 <tr>
                     <th>SL.No</th><th>Court Name</th><th>Filed Date</th><th>Nature of Case</th>
-                    <th>Case No</th><th>GR Number</th><th>GR Date</th><th>Plaintiff</th><th>Defendant</th><th>Made Over Court</th><th>Hearing Date</th><th>Image 1</th><th>Image 2</th><th>Actions</th>
+                    <th>Case No</th><th>GR Number</th><th>GR Date</th><th>Plaintiff</th><th>Defendant</th><th>Made Over Court</th><th>Hearing Date</th><th>Status</th><th>Photocopy 1</th><th>Photocopy 2</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for case in new_cases %}
-                <tr>
+                <tr class="{% if case.status == 'Completed' %}table-success{% elif case.status == 'In progress' %}table-warning{% endif %}">
                     <td>{{ loop.index }}</td>
                     <td>{{ case.court_name }}</td>
                     <td>{{ case.filed_date }}</td>
@@ -63,6 +67,7 @@
                     <td>{{ case.defendant_name }}</td>
                     <td>{{ case.made_over_court }}</td>
                     <td>{{ case.hearing_date }}</td>
+                    <td>{{ case.status }}</td>
                     <td>
                         {% if case.image1 %}
                         <img src="{{ url_for('static', filename='images/new_cases/' + case.image1) }}" alt="Image 1">

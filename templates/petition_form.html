@@ -60,6 +60,10 @@
             <label class="form-label">Hearing Date</label>
             <input type="date" name="hearing_date" class="form-control" value="{{ entry['hearing_date'] if entry else '' }}">
         </div>
+        <div class="mb-3">
+            <label class="form-label">Status</label>
+            <input type="text" name="status" class="form-control" value="{{ entry['status'] if entry else '' }}">
+        </div>
 
         {% if entry and entry.image1 %}
         <div class="mb-3">

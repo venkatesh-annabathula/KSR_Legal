@@ -32,6 +32,10 @@
             max-height: 80px;
             border-radius: 8px;
         }
+        .td {
+            align-items: center;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -46,12 +50,12 @@
             <thead>
                 <tr>
                     <th>SL.No</th><th>Court Name</th><th>Case No</th><th>Filed Date</th>
-                    <th>Filed For</th><th>GR Number</th><th>GR Date</th><th>Hearing Date</th><th>Image 1</th><th>Image 2</th><th>Actions</th>
+                    <th>Filed For</th><th>GR Number</th><th>GR Date</th><th>Hearing Date</th><th>Status</th><th>Photocopy 1</th><th>Photocopy 2</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for petition in petitions %}
-                <tr>
+                <tr class="{% if petition.status == 'Completed' %}table-success{% elif petition.status == 'In progress' %}table-warning{% endif %}">
                     <td>{{ loop.index }}</td>
                     <td>{{ petition.court_name }}</td>
                     <td>{{ petition.case_no }}</td>
@@ -60,6 +64,7 @@
                     <td>{{ petition.gr_number }}</td>
                     <td>{{ petition.gr_date }}</td>
                     <td>{{ petition.hearing_date }}</td>
+                    <td>{{ petition.status }}</td>
                     <td>
                         {% if petition.image1 %}
                         <img src="{{ url_for('static', filename='images/petitions/' + petition.image1) }}" alt="Image 1">

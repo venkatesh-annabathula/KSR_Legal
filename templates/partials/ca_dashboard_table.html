@@ -32,6 +32,10 @@
             max-height: 80px;
             border-radius: 8px;
         }
+        .td {
+            align-items: center;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -46,12 +50,12 @@
             <thead>
                 <tr>
                     <th>Case No</th><th>CA Filed Date</th><th>CA No</th><th>Requested Documents</th><th>Filed For</th><th>CF Date</th>
-                    <th>CF/NJS Amount</th><th>CF Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Image 1</th><th>Image 2</th><th>Actions</th>
+                    <th>CF/NJS Amount</th><th>CF Paid Date</th><th>Ready Date</th><th>Remarks</th><th>Status</th><th>Photocopy 1</th><th>Photocopy 2</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for task in tasks %}
-                <tr>
+                <tr class="{% if task.status == 'Completed' %}table-success{% elif task.status == 'In progress' %}table-warning{% endif %}">
                     <td>{{ task.case_number }}</td>
                     <td>{{ task.ca_filed_date }}</td>
                     <td>{{ task.ca_number }}</td>
@@ -62,6 +66,7 @@
                     <td>{{ task.cf_paid_date }}</td>
                     <td>{{ task.ca_ready_date }}</td>
                     <td>{{ task.remarks }}</td>
+                    <td>{{ task.status }}</td>
                     <td>
                         {% if task.image1 %}
                         <img src="{{ url_for('static', filename='images/ca/' + task.image1) }}" alt="Image 1">
