@@ -84,7 +84,13 @@
             <th>Case No</th>
             <th>CA Filed Date</th>
             <th>CA Number</th>
+            <th>Requested Documents</th>
             <th>Filed For</th>
+            <th>CF Date</th>
+            <th>CF/NJS Amount</th>
+            <th>CF Paid Date</th>
+            <th>Ready Date</th>
+            <th>Remarks</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -94,7 +100,13 @@
             <td>{{ task.case_number }}</td>
             <td>{{ task.ca_filed_date }}</td>
             <td>{{ task.ca_number }}</td>
+            <td>{{ task.required_details }}</td>
             <td>{{ task.filed_for }}</td>
+            <td>{{ task.cf_date }}</td>
+            <td>{{ task.cf_amount }}</td>
+            <td>{{ task.cf_paid_date }}</td>
+            <td>{{ task.ca_ready_date }}</td>
+            <td>{{ task.remarks }}</td>
             <td>{{ task.status }}</td>
         </tr>
     {% endfor %}
