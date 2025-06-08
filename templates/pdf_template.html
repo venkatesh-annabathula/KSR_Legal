@@ -118,7 +118,16 @@
 <table>
     <thead>
         <tr>
-            <th>Court</th><th>Case No</th><th>Paid On</th><th>Paid For</th><th>Status</th>
+            <th>Court</th>
+            <th>Case No</th>
+            <th>Betta Paid On</th>
+            <th>Betta Paid For</th>
+            <th>GR Number</th>
+            <th>GR Date</th>
+            <th>Betta Returned Date</th>
+            <th>PSA Numbers</th>
+            <th>Status</th>
+            <th>Remarks</th>
         </tr>
     </thead>
     <tbody>
@@ -128,7 +137,12 @@
             <td>{{ b.case_no }}</td>
             <td>{{ b.betta_paid_on }}</td>
             <td>{{ b.betta_paid_for }}</td>
+            <td>{{ b.gr_number }}</td>
+            <td>{{ b.gr_date }}</td>
+            <td>{{ b.betta_returned_date }}</td>
+            <td>{{ b.psa_numbers }}</td>
             <td>{{ b.status }}</td>
+            <td>{{ b.remarks }}</td>
         </tr>
     {% endfor %}
     </tbody>
@@ -139,7 +153,13 @@
 <table>
     <thead>
         <tr>
-            <th>Court</th><th>Case No</th><th>Filed Date</th><th>Filed For</th><th>Status</th>
+            <th>Court</th>
+            <th>Case No</th>
+            <th>Petition Filed Date</th>
+            <th>Petition Filed For</th>
+            <th>GR Number</th>
+            <th>Hearing Date</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -149,6 +169,8 @@
             <td>{{ p.case_no }}</td>
             <td>{{ p.petition_filed_date }}</td>
             <td>{{ p.petition_filed_for }}</td>
+            <td>{{ p.gr_number }}</td>
+            <td>{{ p.hearing_date }}</td>
             <td>{{ p.status }}</td>
         </tr>
     {% endfor %}
@@ -160,7 +182,17 @@
 <table>
     <thead>
         <tr>
-            <th>Court</th><th>Filed Date</th><th>Nature</th><th>Case No</th><th>Status</th>
+            <th>Court</th>
+            <th>Filed Date</th>
+            <th>Nature of Case</th>
+            <th>Case No</th>
+            <th>GR Number</th>
+            <th>GR Date</th>
+            <th>Plaintiff Name</th>
+            <th>Defendant Name</th>
+            <th>Made Over Court</th>
+            <th>Hearing Date</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -170,6 +202,12 @@
             <td>{{ n.filed_date }}</td>
             <td>{{ n.nature_of_case }}</td>
             <td>{{ n.case_no }}</td>
+            <td>{{ n.gr_number }}</td>
+            <td>{{ n.gr_date }}</td>
+            <td>{{ n.plaintiff_name }}</td>
+            <td>{{ n.defendant_name }}</td>
+            <td>{{ n.made_over_court }}</td>
+            <td>{{ n.hearing_date }}</td>
             <td>{{ n.status }}</td>
         </tr>
     {% endfor %}

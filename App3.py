@@ -459,10 +459,10 @@ def download_excel():
                 cell.fill = fill
 
     # Define fields for each model
-    add_sheet("CA Dashboard", task_data, ['case_number', 'ca_filed_date', 'ca_number', 'filed_for', 'status'])
-    add_sheet("BETTA Filing", betta_data, ['court_name', 'case_no', 'betta_paid_on', 'betta_paid_for', 'status'])
-    add_sheet("PETITIONS Filing", petition_data, ['court_name', 'case_no', 'petition_filed_date', 'petition_filed_for', 'status'])
-    add_sheet("NEW CASE Filing", newcase_data, ['court_name', 'filed_date', 'nature_of_case', 'case_no', 'status'])
+    add_sheet("CA Dashboard", task_data, ['case_number', 'ca_filed_date', 'ca_number', 'required_details', 'filed_for', 'cf_date', 'cf_amount', 'cf_paid_date', 'ca_ready_date', 'remarks', 'status'])
+    add_sheet("BETTA Filing", betta_data, ['court_name', 'case_no', 'betta_paid_on', 'betta_paid_for', 'gr_number', 'gr_date', 'betta_returned_date', 'psa_numbers', 'status', 'remarks'])
+    add_sheet("PETITIONS Filing", petition_data, ['court_name', 'case_no', 'petition_filed_date', 'petition_filed_for', 'gr_number', 'hearing_date', 'status'])
+    add_sheet("NEW CASE Filing", newcase_data, ['court_name', 'filed_date', 'nature_of_case', 'case_no', 'gr_number', 'gr_date', 'plaintiff_name', 'defendant_name', 'made_over_court', 'hearing_date', 'status'])
 
     # Save to memory
     from io import BytesIO
