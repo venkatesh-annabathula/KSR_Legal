@@ -39,7 +39,7 @@
 
         <div class="mb-3">
             <label class="form-label">Court Name</label>
-            <input type="text" name="court_name" class="form-control" value="{{ entry['court_name'] if entry else '' }}">
+            <input type="text" required name="court_name" class="form-control" value="{{ entry['court_name'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
@@ -49,17 +49,17 @@
 
         <div class="mb-3">
             <label class="form-label">Nature of Case</label>
-            <input type="text" name="nature_of_case" class="form-control" value="{{ entry['nature_of_case'] if entry else '' }}">
+            <input type="text" required name="nature_of_case" class="form-control" value="{{ entry['nature_of_case'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Case No</label>
-            <input type="text" name="case_no" class="form-control" value="{{ entry['case_no'] if entry else '' }}">
+            <input type="text" required name="case_no" class="form-control" value="{{ entry['case_no'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label">GR Number</label>
-            <input type="text" name="gr_number" class="form-control" value="{{ entry['gr_number'] if entry else '' }}">
+            <input type="text" required name="gr_number" class="form-control" value="{{ entry['gr_number'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
@@ -69,17 +69,17 @@
 
         <div class="mb-3">
             <label class="form-label">Plaintiff Name</label>
-            <input type="text" name="plaintiff_name" class="form-control" value="{{ entry['plaintiff_name'] if entry else '' }}">
+            <input type="text" required name="plaintiff_name" class="form-control" value="{{ entry['plaintiff_name'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Defendant Name</label>
-            <input type="text" name="defendant_name" class="form-control" value="{{ entry['defendant_name'] if entry else '' }}">
+            <input type="text" required name="defendant_name" class="form-control" value="{{ entry['defendant_name'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
             <label class="form-label">Made Over Court</label>
-            <input type="text" name="made_over_court" class="form-control" value="{{ entry['made_over_court'] if entry else '' }}">
+            <input type="text" required name="made_over_court" class="form-control" value="{{ entry['made_over_court'] if entry else '' }}">
         </div>
 
         <div class="mb-3">
@@ -89,7 +89,7 @@
 
         <div class="mb-3">
             <label class="form-label">Status</label>
-            <input type="text" name="status" class="form-control" value="{{ entry['status'] if entry else '' }}">
+            <input type="text" required name="status" class="form-control" value="{{ entry['status'] if entry else '' }}">
         </div>
 
         {% if entry and entry.image1 %}

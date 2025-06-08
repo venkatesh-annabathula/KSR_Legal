@@ -38,11 +38,11 @@
         {% endfor %} -->
         <div class="mb-3">
             <label class="form-label">Court Name</label>
-            <input type="text" name="court_name" class="form-control" value="{{ entry['court_name'] if entry else '' }}">
+            <input type="text" required name="court_name" class="form-control" value="{{ entry['court_name'] if entry else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Case No</label>
-            <input type="text" name="case_no" class="form-control" value="{{ entry['case_no'] if entry else '' }}">
+            <input type="text" required name="case_no" class="form-control" value="{{ entry['case_no'] if entry else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Petition Filed Date</label>
@@ -50,11 +50,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Petition Filed For</label>
-            <input type="text" name="petition_filed_for" class="form-control" value="{{ entry['petition_filed_for'] if entry else '' }}">
+            <input type="text" required name="petition_filed_for" class="form-control" value="{{ entry['petition_filed_for'] if entry else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">GR Number</label>
-            <input type="text" name="gr_number" class="form-control" value="{{ entry['gr_number'] if entry else '' }}">
+            <input type="text" required name="gr_number" class="form-control" value="{{ entry['gr_number'] if entry else '' }}">
         </div>
         <div class="mb-3">
             <label class="form-label">Hearing Date</label>
@@ -62,7 +62,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Status</label>
-            <input type="text" name="status" class="form-control" value="{{ entry['status'] if entry else '' }}">
+            <input type="text" required name="status" class="form-control" value="{{ entry['status'] if entry else '' }}">
         </div>
 
         {% if entry and entry.image1 %}
